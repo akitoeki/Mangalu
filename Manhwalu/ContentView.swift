@@ -10,33 +10,64 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection = 0
- 
+    @Environment(\.colorScheme) var colorScheme
+    
+    
     var body: some View {
         TabView(selection: $selection){
-            Text("First View")
+            HomeView()
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image("first")
-                        Text("First")
+                        Image("trending")
+                            .renderingMode(.template)
+                        Text("Trending")
                     }
-                }
-                .tag(0)
-            Text("Second View")
+                    .padding(.top, 4)
+            }
+            .tag(0)
+            
+            Text("Library")
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image("second")
-                        Text("Second")
+                        Image("library")
+                            .renderingMode(.template)
+                        Text("Library")
                     }
-                }
-                .tag(1)
+            }
+            .tag(1)
+            
+            Text("Discover")
+                .font(.title)
+                .tabItem {
+                    VStack {
+                        Image("explore")
+                            .renderingMode(.template)
+                        Text("Discover")
+                    }
+            }
+            .tag(2)
+            
+            Text("Search")
+                .font(.title)
+                .tabItem {
+                    VStack {
+                        Image("search")
+                            .renderingMode(.template)
+                        Text("Search")
+                    }
+            }
+            .tag(3)
         }
+        .edgesIgnoringSafeArea(.top)
+        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environment(\.colorScheme, .dark)
     }
 }
