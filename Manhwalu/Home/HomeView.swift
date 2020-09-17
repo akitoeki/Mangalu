@@ -9,34 +9,13 @@
 import SwiftUI
 
 
-struct TitleList: View {
-    var listName: String
-    var titles: [Title]
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(listName)
-                .font(.system(.subheadline, design: .serif))
-                .fontWeight(.bold)
-                .padding(.horizontal)
-            if (titles.count > 0) {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .top, spacing: 10) {
-                        ForEach(titles, id: \.id) { title in
-                            TitleView(title: title)
-                        }
-                    }
-                    .padding(.all)
-                }
-            }
-            
-        }
-    }
-}
 
 struct HomeView: View {
     @State var popularTitles: [Title] = []
     @State var lastestTitles: [Title] = []
     @State var randomTitles: [Title] = []
+    @State var portal: PortalPreference?
+    @State var isShowing: Bool = false
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 32)!]
         
@@ -48,30 +27,51 @@ struct HomeView: View {
         self.lastestTitles = lastestTitles
     }
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack {
-                    TitleList(listName: "Popular", titles: popularTitles)
-                    TitleList(listName: "Lastest", titles: lastestTitles)
-                    TitleList(listName: "Discover", titles: randomTitles)
-                    Spacer()
-                }
-                .frame(width: UIScreen.main.bounds.width)
+        
+        ZStack {
+            VStack {
+                NavigationView {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack {
+                            TitleList(listName: "Popular", titles: popularTitles)
+                            TitleList(listName: "Lastest", titles: lastestTitles)
+                            TitleList(listName: "Discover", titles: randomTitles)
+                            Spacer()
+                            Button(action: {
+                                self.isShowing = true
+                            }) {
+                                Text("Test")
+                            }
+                        }
+                        .frame(width: UIScreen.main.bounds.width)
+                    
 
+                    }
+                    .navigationBarTitle(Text("Trending").font(.system(.largeTitle, design: .monospaced)), displayMode: .large)
+                    .portal(isShowing: self.$isShowing) {
+                        Text("POrtal working")
+                    }
+                    
+                }
+                .onAppear {
+                    print("RERENDERED")
+                    api.getLastesTitles { (titles) in
+                        self.lastestTitles = titles
+                    }
+                    api.getPopularTitles { (titles) in
+                        self.popularTitles = titles
+                    }
+                    api.getRandomTitles { (titles) in
+                        self.randomTitles = titles
+                    }
+                }
+                .onPreferenceChange(PortalPreferenceKey.self) { (value) in
+                    self.portal = value
+                }
             }
-            .navigationBarTitle(Text("Trending").font(.system(.largeTitle, design: .monospaced)), displayMode: .large)
-            
-        }
-        .onAppear {
-            print("RERENDERED")
-            api.getLastesTitles { (titles) in
-                self.lastestTitles = titles
-            }
-            api.getPopularTitles { (titles) in
-                self.popularTitles = titles
-            }
-            api.getRandomTitles { (titles) in
-                self.randomTitles = titles
+            if (self.portal != nil) {
+                Color(.darkGray)
+                self.portal!.content()
             }
         }
         
@@ -80,7 +80,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        TitleList(listName: "Popular", titles: dummy_titles)
+        HomeView()
     }
 }
 

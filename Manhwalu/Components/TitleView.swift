@@ -11,6 +11,7 @@ import SwiftUI
 
 struct TagView: View {
     var name: String = ""
+    
     var body: some View {
         Text(name)
             .font(.caption)
@@ -22,15 +23,20 @@ struct TagView: View {
 }
 struct TitleView: View {
     var title: Title
+    @Binding var showDetail: Bool
     @ObservedObject var urlImageModel: UrlImageModel
     
-    init(title: Title) {
+    init(title: Title, showDetail: Binding<Bool>) {
         self.title = title
+        self._showDetail = showDetail
         self.urlImageModel = UrlImageModel(urlString: title.image_url)
     }
     
     func topTags(tags: [Tag], max: Int) -> [Tag] {
         let cutoff = tags.count >= max ? max : tags.count
+        guard cutoff > 0 else {
+            return []
+        }
         return Array(tags[0...cutoff-1])
     }
     
@@ -41,7 +47,12 @@ struct TitleView: View {
                 .scaledToFill()
                 .frame(width: 150, height: 210)
                 .cornerRadius(4)
-//                .shadow(radius: 20)
+//                .shadow(color: Color(.systemGray2).opacity(0.5), radius: 30, x: 0, y: 10)
+//                .frame(width: 100, height: 180)
+//                .shadow(color: Color.gray.opacity(0.5), radius: 5, x: 0, y: 10)
+//                
+//                .frame(width: 150, height: 210)
+            
             Text("\(title.title)")
                 .font(.caption)
                 .fontWeight(.bold)
@@ -49,11 +60,11 @@ struct TitleView: View {
                 .lineLimit(2)
                 .padding(0)
                 .frame(width: 150, alignment: .topLeading)
-//            HStack(alignment: .top, spacing: 4) {
-//                ForEach(self.topTags(tags: title.tags, max: 2), id: \.id) { tag in
-//                    TagView(name: tag.name)
-//                }
-//            }
+            HStack(alignment: .top, spacing: 4) {
+                ForEach(self.topTags(tags: title.tags, max: 2), id: \.id) { tag in
+                    TagView(name: tag.name)
+                }
+            }
         }
     }
     
@@ -62,6 +73,6 @@ struct TitleView: View {
 
 struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
-        TitleView(title: dummy_title)
+        TitleView(title: dummy_title, showDetail: .constant(true))
     }
 }

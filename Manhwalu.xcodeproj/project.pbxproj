@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82C416A32513A56D004A64F5 /* TitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C416A22513A56D004A64F5 /* TitleList.swift */; };
+		82C416A52513B835004A64F5 /* Portal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C416A42513B835004A64F5 /* Portal.swift */; };
 		C274CCC02511CF62000E1E8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C274CCBF2511CF62000E1E8C /* AppDelegate.swift */; };
 		C274CCC22511CF62000E1E8C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C274CCC12511CF62000E1E8C /* SceneDelegate.swift */; };
 		C274CCC52511CF62000E1E8C /* Manhwalu.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C274CCC32511CF62000E1E8C /* Manhwalu.xcdatamodeld */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		82C416A22513A56D004A64F5 /* TitleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleList.swift; sourceTree = "<group>"; };
+		82C416A42513B835004A64F5 /* Portal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portal.swift; sourceTree = "<group>"; };
 		C274CCBC2511CF62000E1E8C /* Manhwalu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Manhwalu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C274CCBF2511CF62000E1E8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C274CCC12511CF62000E1E8C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				C274CCFF2511E8BB000E1E8C /* HomeView.swift */,
+				82C416A22513A56D004A64F5 /* TitleList.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				C274CD0625121A55000E1E8C /* TitleView.swift */,
+				82C416A42513B835004A64F5 /* Portal.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -319,11 +325,13 @@
 			files = (
 				C274CCC02511CF62000E1E8C /* AppDelegate.swift in Sources */,
 				C274CD002511E8BB000E1E8C /* HomeView.swift in Sources */,
+				82C416A32513A56D004A64F5 /* TitleList.swift in Sources */,
 				C274CCC22511CF62000E1E8C /* SceneDelegate.swift in Sources */,
 				C274CD042511F70B000E1E8C /* UrlImageModel.swift in Sources */,
 				C274CCC72511CF62000E1E8C /* ContentView.swift in Sources */,
 				C274CCC52511CF62000E1E8C /* Manhwalu.xcdatamodeld in Sources */,
 				C274CCFE2511E1E5000E1E8C /* API.swift in Sources */,
+				82C416A52513B835004A64F5 /* Portal.swift in Sources */,
 				C274CD0925121A7D000E1E8C /* dummy.swift in Sources */,
 				C274CD0725121A55000E1E8C /* TitleView.swift in Sources */,
 			);

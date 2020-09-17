@@ -31,8 +31,7 @@ struct Title: Codable, Identifiable {
     var alternate_title: String?
     var description: String?
     var image_url: String
-    var thumb_url: String
-    var status: String
+    var thumb_url: String    
     var tags: [Tag]
 }
 
