@@ -8,71 +8,55 @@
 
 import SwiftUI
 
-
+struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+}
 
 struct HomeView: View {
-    @State var popularTitles: [Title] = []
-    @State var lastestTitles: [Title] = []
-    @State var randomTitles: [Title] = []
+    @Namespace var namespace
+    @ObservedObject private var homeModel: HomeModel = HomeModel()
     @State var portal: PortalPreference?
-    @State var isShowing: Bool = false
+    
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 32)!]
-        
-        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 16)!]
+        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 16)!]        
     }
-    init(popularTitles: [Title], lastestTitles: [Title]) {
-        self.init()
-        self.popularTitles = popularTitles
-        self.lastestTitles = lastestTitles
-    }
+    
     var body: some View {
-        
         ZStack {
+            Color(.black)
             VStack {
                 NavigationView {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {
-                            TitleList(listName: "Popular", titles: popularTitles)
-                            TitleList(listName: "Lastest", titles: lastestTitles)
-                            TitleList(listName: "Discover", titles: randomTitles)
-                            Spacer()
-                            Button(action: {
-                                self.isShowing = true
-                            }) {
-                                Text("Test")
-                            }
+                            TitleList(listName: "Popular", titles: self.homeModel.popularTitles, namespace: namespace)
+                            TitleList(listName: "Lastest", titles: self.homeModel.lastestTitles, namespace: namespace)
+                            TitleList(listName: "Discover", titles: self.homeModel.randomTitles, namespace: namespace)
+                                
                         }
                         .frame(width: UIScreen.main.bounds.width)
-                    
-
                     }
-                    .navigationBarTitle(Text("Trending").font(.system(.largeTitle, design: .monospaced)), displayMode: .large)
-                    .portal(isShowing: self.$isShowing) {
-                        Text("POrtal working")
-                    }
-                    
+                    .navigationBarTitle("Trending", displayMode: .large)
                 }
                 .onAppear {
-                    print("RERENDERED")
-                    api.getLastesTitles { (titles) in
-                        self.lastestTitles = titles
-                    }
-                    api.getPopularTitles { (titles) in
-                        self.popularTitles = titles
-                    }
-                    api.getRandomTitles { (titles) in
-                        self.randomTitles = titles
-                    }
+                    homeModel.loadData()
                 }
                 .onPreferenceChange(PortalPreferenceKey.self) { (value) in
                     self.portal = value
                 }
-            }
-            if (self.portal != nil) {
-                Color(.darkGray)
-                self.portal!.content()
-            }
+                .zIndex(1)
+//                .brightness(self.portal != nil ? -0.2 : 0)
+//                .animation(.default, value: self.portal)
+                
+                
+                
+            }.environmentObject(homeModel)
+            
+//            if (self.portal != nil) {
+//                self.portal!.content()
+//            }
         }
         
     }

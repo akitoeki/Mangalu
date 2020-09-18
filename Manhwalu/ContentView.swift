@@ -24,8 +24,8 @@ struct ContentView: View {
                         Text("Trending")
                     }
                     .padding(.top, 4)
-            }
-            .tag(0)
+                }
+                .tag(0)
             
             Text("Library")
                 .font(.title)
@@ -35,8 +35,9 @@ struct ContentView: View {
                             .renderingMode(.template)
                         Text("Library")
                     }
-            }
-            .tag(1)
+                }
+                
+                .tag(1)
             
             Text("Discover")
                 .font(.title)
@@ -46,8 +47,8 @@ struct ContentView: View {
                             .renderingMode(.template)
                         Text("Discover")
                     }
-            }
-            .tag(2)
+                }
+                .tag(2)
             
             Text("Search")
                 .font(.title)
@@ -57,9 +58,10 @@ struct ContentView: View {
                             .renderingMode(.template)
                         Text("Search")
                     }
-            }
-            .tag(3)
+                }
+                .tag(3)
         }
+        .accentColor(.orange)
         .edgesIgnoringSafeArea(.top)
         
     }

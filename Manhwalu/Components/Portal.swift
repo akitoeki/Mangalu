@@ -8,29 +8,10 @@
 
 import SwiftUI
 
-struct Portal<Presenting: View, Content: View>: View {
-    @Binding var isShowing: Bool
-    var presenting: Presenting
-    var content: Content
-    init(isShowing: Binding<Bool>, @ViewBuilder presenting: () -> Presenting, @ViewBuilder content: () -> Content) {
-        self._isShowing = isShowing
-        self.presenting = presenting()
-        self.content = content()
-    }
-    var body: some View {
-        ZStack(alignment: .center) {
-            self.presenting
-                .blur(radius: self.isShowing ? 1 : 0)
-            VStack {
-                self.content
-            }
-        }
-    }
-}
-
 struct PortalPreference: Equatable, Identifiable {
     let id = UUID()
     let content: () -> AnyView
+    let isPresenting: Binding<Bool>
     let shouldDismiss: () -> Bool
     let resetBinding: () -> Void
     
@@ -41,6 +22,7 @@ struct PortalPreference: Equatable, Identifiable {
 
 struct PortalPreferenceKey: PreferenceKey {
     typealias Value = PortalPreference?
+    
     static var defaultValue: Value = nil
     
     static func reduce(value: inout Value, nextValue: () -> Value) {
@@ -51,11 +33,13 @@ struct PortalPreferenceKey: PreferenceKey {
 
 struct PortalModifier<PortalContent: View>: ViewModifier {
     @Binding var isPresented: Bool
-    let content: () -> PortalContent
+    typealias DismissCallback = () -> Void
+    let content: (_ dismiss: @escaping DismissCallback) -> PortalContent
     
     func portal() -> PortalPreference {
         PortalPreference (
-            content: {AnyView(self.content())},
+            content: {AnyView(self.content({ self.isPresented = false}))},
+            isPresenting: $isPresented,
             shouldDismiss: { !self.isPresented },
             resetBinding: { self.isPresented = false }
         )
@@ -69,7 +53,7 @@ struct PortalModifier<PortalContent: View>: ViewModifier {
 
 
 extension View {
-    func portal<Content:View>(isShowing: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) -> some View {
-        modifier(PortalModifier(isPresented: isShowing, content: content))
+    func portal<Content:View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping (_ dismiss:  @escaping () -> Void) -> Content) -> some View {
+        modifier(PortalModifier(isPresented: isPresented, content: content))
     }
 }
