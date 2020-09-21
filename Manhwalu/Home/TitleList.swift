@@ -18,7 +18,7 @@ struct TitleList: View {
             Text(listName)
                 .font(.system(.subheadline, design: .serif))
                 .fontWeight(.bold)
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
             if (titles.count > 0) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .top, spacing: 20) {
@@ -28,14 +28,13 @@ struct TitleList: View {
                                 label: {
                                     TitleView(title: title)
                                 }
-                            ).foregroundColor(.black)
+                            ).foregroundColor(.primaryText)
                         }
                     }                    
-                    .padding(.all)
-                    .padding(.top, 30)
+                    .padding(.all)                    
                 }
             }
-        }.frame(width: screen.width, height: 320, alignment: .topLeading)
+        }.frame(width: screen.width, height: 330, alignment: .topLeading)
     }
 }
 struct TitleList_Previews: PreviewProvider {

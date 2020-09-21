@@ -11,7 +11,6 @@ import SwiftUI
 class HomeModel: ObservableObject {
     @Published var isLoaded = false
     @Published var isLoading = false
-    @Published var namespace: Namespace.ID = Namespace().wrappedValue
     @Published var popularTitles: [Title] = []
     @Published var isLoadingPopular = false
     
@@ -59,7 +58,4 @@ class HomeModel: ObservableObject {
         isLoaded = true
     }
     
-    func setNamespace(namespace: Namespace.ID) {
-        self.namespace = namespace
-    }
 }

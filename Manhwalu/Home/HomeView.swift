@@ -26,7 +26,7 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            Color(.black)
+            Color("TextPrimary")
             VStack {
                 NavigationView {
                     ScrollView(.vertical, showsIndicators: false) {

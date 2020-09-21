@@ -27,6 +27,8 @@
 		C274CD042511F70B000E1E8C /* UrlImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C274CD032511F70B000E1E8C /* UrlImageModel.swift */; };
 		C274CD0725121A55000E1E8C /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C274CD0625121A55000E1E8C /* TitleView.swift */; };
 		C274CD0925121A7D000E1E8C /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C274CD0825121A7D000E1E8C /* dummy.swift */; };
+		C2F50F752518B22F00F6AB76 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F50F742518B22F00F6AB76 /* Color.swift */; };
+		C2F50F7A2518BBF400F6AB76 /* CustomTopNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F50F792518BBF400F6AB76 /* CustomTopNav.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		C274CD032511F70B000E1E8C /* UrlImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlImageModel.swift; sourceTree = "<group>"; };
 		C274CD0625121A55000E1E8C /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		C274CD0825121A7D000E1E8C /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
+		C2F50F742518B22F00F6AB76 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		C2F50F792518BBF400F6AB76 /* CustomTopNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopNav.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				82C416A42513B835004A64F5 /* Portal.swift */,
+				C2F50F742518B22F00F6AB76 /* Color.swift */,
+				C2F50F792518BBF400F6AB76 /* CustomTopNav.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -259,7 +265,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1170;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Nhan Dang";
 				TargetAttributes = {
 					C274CCBB2511CF62000E1E8C = {
@@ -331,7 +337,9 @@
 				C274CD002511E8BB000E1E8C /* HomeView.swift in Sources */,
 				82C416A32513A56D004A64F5 /* TitleList.swift in Sources */,
 				C274CCC22511CF62000E1E8C /* SceneDelegate.swift in Sources */,
+				C2F50F7A2518BBF400F6AB76 /* CustomTopNav.swift in Sources */,
 				82C1B1212515C22E00375560 /* TitleModel.swift in Sources */,
+				C2F50F752518B22F00F6AB76 /* Color.swift in Sources */,
 				C274CD042511F70B000E1E8C /* UrlImageModel.swift in Sources */,
 				C274CCC72511CF62000E1E8C /* ContentView.swift in Sources */,
 				C274CCC52511CF62000E1E8C /* Manhwalu.xcdatamodeld in Sources */,
@@ -414,6 +422,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -474,6 +483,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

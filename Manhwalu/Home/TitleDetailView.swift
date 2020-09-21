@@ -34,6 +34,7 @@ struct HorizontalLine: View {
     }
 }
 
+
 struct TitleDetailView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -43,6 +44,8 @@ struct TitleDetailView: View {
     @ObservedObject var urlImageModel: UrlImageModel
     var defaultImage = UIImage(named: "poster-placeholder")
     
+    @State var headerVisible: Bool = false
+    
     init(title: Title) {
         self.title = title
         self.titleModel = TitleModel(title: self.title)
@@ -50,6 +53,13 @@ struct TitleDetailView: View {
     }
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
+            GeometryReader { geometry in
+                CustomTopNav(title: self.title.title, visible: geometry.frame(in: .global).minY < -400)
+                    .offset(y: -geometry.frame(in: .global).minY )                    
+            }
+            .frame(height: 0)
+            .zIndex(100)
+                        
             VStack {
                 //Header
                 HStack {
@@ -62,59 +72,66 @@ struct TitleDetailView: View {
                     })
                     Spacer()
                 }
-                Image(uiImage: urlImageModel.image ?? TitleView.defaultImage!)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 300, height: 420)
-                    .cornerRadius(4)
-                    .shadow(color: Color.gray.opacity(0.2), radius: 30, x: 0, y: 10)
-                    .frame(width: 200, height: 320)
-                    .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 10)
-                    .frame(width: 300, height: 420)
-                HStack {
-                    ForEach(TitleView.topTags(tags: title.tags, max: 2), id: \.id) { tag in
-                        TagView(name: tag.name)
-                    }
-                }
-                .padding(.top, 10)
-                
-                Text(title.title)
-                    .font(.custom("Georgia-Bold", size: 26))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                if (title.alternate_title != nil) {
-                    Text(title.alternate_title!)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                HStack(alignment: .center, spacing: 10) {
-                    Button(action: {}, label: {
-                        HStack {
-                            Image(systemName: "suit.heart")
-                            Text("Add to Library")
-                                .font(.subheadline)
+                .padding(.top, 50)
+                Group {
+                    Image(uiImage: urlImageModel.image ?? TitleView.defaultImage!)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 300, height: 420)
+                        .cornerRadius(4)
+                        .shadow(color: Color.gray.opacity(0.2), radius: 30, x: 0, y: 10)
+                        .frame(width: 200, height: 320)
+                        .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 10)
+                        .frame(width: 300, height: 420)
+                    
+                    HStack {
+                        ForEach(TitleView.topTags(tags: title.tags, max: 5), id: \.id) { tag in
+                            TagView(name: tag.name)
                         }
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 24)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color.accentColor, lineWidth: 2)
-                            
-                        )
-                    })
+                    }
+                    .padding(.top, 10)
                     
-                    Button(action: {}, label: {
-                        Image(systemName: "book")
-                        Text("Read Now")
-                            .font(.subheadline)
-                    })
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 26)
-                    .background(Color.orange)
-                    .accentColor(.white)
-                    .cornerRadius(30)
-                    
+                    Text(title.title)
+                        .font(.custom("Georgia-Bold", size: 26))
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .multilineTextAlignment(.center)
+                        .padding(.vertical, 4.0)
+                    if (title.alternate_title != nil) {
+                        Text(title.alternate_title!)
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    HStack(alignment: .center, spacing: 10) {
+                        Button(action: {}, label: {
+                            HStack {
+                                Image(systemName: "suit.heart")
+                                Text("Add to Library")
+                                    .font(.subheadline)
+                            }
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 24)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Color.accentColor, lineWidth: 2)
+                                
+                            )
+                        })
+                        
+                        Button(action: {}, label: {
+                            Image(systemName: "book")
+                            Text("Read Now")
+                                .font(.subheadline)
+                        })
+                        .padding(.vertical, 12)
+                        .padding(.horizontal, 26)
+                        .background(Color.orange)
+                        .accentColor(.white)
+                        .cornerRadius(30)
+                        
+                    }
+                    .padding(.vertical, 15)
                 }
-                .padding(.vertical, 15)
+                
                 
                 HorizontalLine(color: Color(.systemGray5))
                     .padding(20)
@@ -144,22 +161,19 @@ struct TitleDetailView: View {
                 HorizontalLine(color: Color(.systemGray5))
                     .padding(20)
                 
-                Text("Chapters")
-                    .frame(width: screen.width - 40, alignment: .leading)
-                    .multilineTextAlignment(.leading)
-                    .font(.custom("Georgia-Bold", size: 15))
-                    .padding(.bottom, 10)
+                
+                TitleChapterList(chapters: titleModel.chapters)
                 
             }
         }
-        .accentColor(self.colorScheme == .dark ? .white : .black)
+        .accentColor(.primaryText)
+        .navigationBarHidden(true)
         .navigationTitle("")
-        .navigationBarHidden(true)        
         .onAppear {
             titleModel.loadData()
         }
-        
-        
+        .overlay(CustomTopNav(title: title.title, visible: self.headerVisible), alignment: .top)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
