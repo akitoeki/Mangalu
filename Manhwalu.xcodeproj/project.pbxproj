@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		827564242517246F009D6A33 /* TitleChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827564232517246F009D6A33 /* TitleChapter.swift */; };
+		82C1B1212515C22E00375560 /* TitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1B1202515C22E00375560 /* TitleModel.swift */; };
 		82C416A32513A56D004A64F5 /* TitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C416A22513A56D004A64F5 /* TitleList.swift */; };
 		82C416A52513B835004A64F5 /* Portal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C416A42513B835004A64F5 /* Portal.swift */; };
 		C247318A2514CF7900C79B66 /* TitleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24731892514CF7900C79B66 /* TitleDetailView.swift */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		827564232517246F009D6A33 /* TitleChapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChapter.swift; sourceTree = "<group>"; };
+		82C1B1202515C22E00375560 /* TitleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModel.swift; sourceTree = "<group>"; };
 		82C416A22513A56D004A64F5 /* TitleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleList.swift; sourceTree = "<group>"; };
 		82C416A42513B835004A64F5 /* Portal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portal.swift; sourceTree = "<group>"; };
 		C24731892514CF7900C79B66 /* TitleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDetailView.swift; sourceTree = "<group>"; };
@@ -99,7 +103,6 @@
 		C274CCB32511CF62000E1E8C = {
 			isa = PBXGroup;
 			children = (
-				C274CCF22511D690000E1E8C /* Context */,
 				C274CCBE2511CF62000E1E8C /* Manhwalu */,
 				C274CCD82511CF63000E1E8C /* ManhwaluTests */,
 				C274CCE32511CF63000E1E8C /* ManhwaluUITests */,
@@ -162,13 +165,6 @@
 			path = ManhwaluUITests;
 			sourceTree = "<group>";
 		};
-		C274CCF22511D690000E1E8C /* Context */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Context;
-			sourceTree = "<group>";
-		};
 		C274CCF32511DF65000E1E8C /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +172,7 @@
 				82C416A22513A56D004A64F5 /* TitleList.swift */,
 				C274CD0625121A55000E1E8C /* TitleView.swift */,
 				C24731892514CF7900C79B66 /* TitleDetailView.swift */,
+				827564232517246F009D6A33 /* TitleChapter.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -186,6 +183,7 @@
 				C274CCFD2511E1E5000E1E8C /* API.swift */,
 				C274CD032511F70B000E1E8C /* UrlImageModel.swift */,
 				C268101F251487FA00D615A6 /* HomeModel.swift */,
+				82C1B1202515C22E00375560 /* TitleModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -333,12 +331,14 @@
 				C274CD002511E8BB000E1E8C /* HomeView.swift in Sources */,
 				82C416A32513A56D004A64F5 /* TitleList.swift in Sources */,
 				C274CCC22511CF62000E1E8C /* SceneDelegate.swift in Sources */,
+				82C1B1212515C22E00375560 /* TitleModel.swift in Sources */,
 				C274CD042511F70B000E1E8C /* UrlImageModel.swift in Sources */,
 				C274CCC72511CF62000E1E8C /* ContentView.swift in Sources */,
 				C274CCC52511CF62000E1E8C /* Manhwalu.xcdatamodeld in Sources */,
 				C274CCFE2511E1E5000E1E8C /* API.swift in Sources */,
 				C2681020251487FA00D615A6 /* HomeModel.swift in Sources */,
 				82C416A52513B835004A64F5 /* Portal.swift in Sources */,
+				827564242517246F009D6A33 /* TitleChapter.swift in Sources */,
 				C247318A2514CF7900C79B66 /* TitleDetailView.swift in Sources */,
 				C274CD0925121A7D000E1E8C /* dummy.swift in Sources */,
 				C274CD0725121A55000E1E8C /* TitleView.swift in Sources */,

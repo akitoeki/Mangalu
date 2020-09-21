@@ -30,7 +30,7 @@ struct TitleView: View {
         self.urlImageModel = UrlImageModel(urlString: title.image_url)
     }
     
-    func topTags(tags: [Tag], max: Int) -> [Tag] {
+    static func topTags(tags: [Tag], max: Int) -> [Tag] {
         let cutoff = tags.count >= max ? max : tags.count
         guard cutoff > 0 else {
             return []
@@ -53,12 +53,13 @@ struct TitleView: View {
                 .lineLimit(2)
                 .padding(0)
                 .frame(width: 150, alignment: .topLeading)
+            
             HStack(alignment: .top, spacing: 4) {
-                ForEach(self.topTags(tags: title.tags, max: 2), id: \.id) { tag in
+                ForEach(TitleView.topTags(tags: title.tags, max: 2), id: \.id) { tag in
                     TagView(name: tag.name)
                 }
             }
-        }
+        }.frame(width: 160, height: 280, alignment: .top)
     }
     
     static var defaultImage = UIImage(named: "poster-placeholder")

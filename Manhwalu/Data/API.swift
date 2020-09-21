@@ -28,6 +28,8 @@ struct Tag: Codable, Identifiable {
 struct Title: Codable, Identifiable {
     let id: Int
     var title: String
+    var chapter_count: Int?
+    var slug: String
     var alternate_title: String?
     var description: String?
     var image_url: String
@@ -55,6 +57,30 @@ class ReadManhwaAPI {
         let url = URL(string: "https://readmanhwa.com/api/comics?discover=true&per_page=24&nsfw=\(nsfw)")
         URLSession.shared.dataTask(with: url!) { (data, _, error) in
             let res = try! JSONDecoder().decode([Title].self, from: data!)
+            completion(res)
+        }.resume()
+    }
+    func getTitleDetail(slug: String, completion: @escaping (TitleDetail) -> ()) {
+        print("https://readmanhwa.com/api/comics/\(slug)&nsfw=\(nsfw)")
+        let url = URL(string: "https://readmanhwa.com/api/comics/\(slug)?nsfw=\(nsfw)")
+        URLSession.shared.dataTask(with: url!) { (data, _, error) in
+        
+            let res = try! JSONDecoder().decode(TitleDetail.self, from: data!)
+            completion(res)
+        }.resume()
+    }
+    func getTitleChapters(slug: String, completion: @escaping ([Chapter]) -> ()) {
+        let url = URL(string: "https://readmanhwa.com/api/comics/\(slug)/chapters?nsfw=\(nsfw)")
+        URLSession.shared.dataTask(with: url!) { (data, _, error) in
+            let res = try! JSONDecoder().decode([Chapter].self, from: data!)
+            completion(res)
+        }.resume()
+    }
+    
+    func getRecommendationForTitle(slug: String, completion: @escaping ([Chapter]) -> ()) {
+        let url = URL(string: "https://readmanhwa.com/api/comics/\(slug)/chapters?nsfw=\(nsfw)")
+        URLSession.shared.dataTask(with: url!) { (data, _, error) in
+            let res = try! JSONDecoder().decode([Chapter].self, from: data!)
             completion(res)
         }.resume()
     }
