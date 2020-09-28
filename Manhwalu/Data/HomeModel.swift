@@ -31,19 +31,25 @@ class HomeModel: ObservableObject {
         self.isLoadingPopular = true
         
         api.getLastesTitles { (titles) in
+            DispatchQueue.main.async {
             self.lastestTitles = titles
             self.isLoadingLatest = false
             self.checkAllLoaded()
+            }
         }
         api.getPopularTitles { (titles) in
+            DispatchQueue.main.async {
             self.popularTitles = titles
             self.isLoadingPopular = false
             self.checkAllLoaded()
+            }
         }
         api.getRandomTitles { (titles) in
+            DispatchQueue.main.async {
             self.randomTitles = titles
             self.isLoadingRandom = true
             self.checkAllLoaded()
+            }
         }
     }
     

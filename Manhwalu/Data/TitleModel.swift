@@ -31,27 +31,33 @@ class TitleModel: ObservableObject {
         if (!isDetailLoaded && !isDetailLoading) {
             isDetailLoading = true
             api.getTitleDetail(slug: title.slug) { (detail) in
-                self.titleDetail = detail
-                self.isDetailLoaded = true
-                self.isDetailLoading = false
+                DispatchQueue.main.async {
+                    self.titleDetail = detail
+                    self.isDetailLoaded = true
+                    self.isDetailLoading = false
+                }                
             }
         }
         
         if (!isChapterLoading) {
             isChapterLoading = true
             api.getTitleChapters(slug: title.slug) { (chapters) in
-                self.chapters = chapters
-                self.isChapterLoaded = true
-                self.isChapterLoading = false
+                DispatchQueue.main.async {
+                    self.chapters = chapters
+                    self.isChapterLoaded = true
+                    self.isChapterLoading = false
+                }
             }
         }
         
         if (!isRecommendationLoaded && !isReccomendationLoading) {
             isReccomendationLoading = true
             api.getTitleChapters(slug: title.slug) { (chapters) in
-                self.chapters = chapters
-                self.isChapterLoaded = true
-                self.isChapterLoading = false
+                DispatchQueue.main.async {
+                    self.chapters = chapters
+                    self.isChapterLoaded = true
+                    self.isChapterLoading = false
+                }
             }
         }
     }

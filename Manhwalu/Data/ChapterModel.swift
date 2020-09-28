@@ -43,33 +43,42 @@ class ChapterModel: ObservableObject {
     }
     
     func setCurrentChapter(chapter: Chapter) {
-        currentChapter = chapter
-        calcNextPrev()
+        DispatchQueue.main.async {
+            self.currentChapter = chapter
+            self.calcNextPrev()
+        }
+        
     }
     
     func goNext() {
         guard self.nextChapter != nil else {
             return
         }
+        DispatchQueue.main.async {
         self.setCurrentChapter(chapter: self.nextChapter!)
         self.chapterDetail = nil
         self.loadChapter(next: self.currentChapter)
+        }
     }
     func goPrev() {
         guard self.prevChapter != nil else {
             return
         }
+        DispatchQueue.main.async {
         self.setCurrentChapter(chapter: self.prevChapter!)
         self.chapterDetail = nil
         self.loadChapter(next: self.currentChapter)
+        }
     }
     
     
     func loadChapter(next: Chapter) {
-        self.currentChapter = next
-        self.isChapterDetailLoaded = false
-        self.isChapterDetailLoading = false
-        self.loadCurrent()
+        DispatchQueue.main.async {
+            self.currentChapter = next
+            self.isChapterDetailLoaded = false
+            self.isChapterDetailLoading = false
+            self.loadCurrent()
+        }
     }
     func loadCurrent() {
         guard isChapterDetailLoading != true && isChapterDetailLoaded != true else {
@@ -77,9 +86,11 @@ class ChapterModel: ObservableObject {
         }
         isChapterDetailLoading = true
         api.getChapterImages(titleSlug: title.slug, chapterSlug: currentChapter.slug) { (chapterDetail) in
-            self.chapterDetail = chapterDetail
-            self.isChapterDetailLoading = false
-            self.isChapterDetailLoaded = true
+            DispatchQueue.main.async {
+                self.chapterDetail = chapterDetail
+                self.isChapterDetailLoading = false
+                self.isChapterDetailLoaded = true
+            }            
         }
     }
 }

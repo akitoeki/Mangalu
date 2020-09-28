@@ -111,7 +111,16 @@ struct Viewer: View {
                         }
                     }
                     .frame(width: screen.width)
-                    ScrollViewReader
+                    GeometryReader { reader in
+                        
+                        if (reader.frame(in: .global).maxY < screen.height - 150) {
+                            Text("")                                
+                                .onAppear(perform: {
+                                    self.chapterModel.goNext()
+                                })
+                            
+                        }
+                    }.frame(width: screen.width, height: 0, alignment: .center)
                 }
                 .zIndex(1)
                 .onTapGesture(perform: {
