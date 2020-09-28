@@ -12,12 +12,12 @@ struct CustomTopNav: View {
     var title: String = "Test"
     var visible: Bool = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        
         HStack {
             ZStack(alignment:.bottom) {
-                VisualEffectView(effect: UIBlurEffect(style: .light))
+                VisualEffectView(effect: UIBlurEffect(style: colorScheme == .dark ? .dark : .light))
                 HStack {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
@@ -41,9 +41,8 @@ struct CustomTopNav: View {
             .background(Rectangle().fill(Color.backgroundColor.opacity(0.5)).blur(radius: 3))
             .accentColor(.primaryText)
             .transition(.opacity)
-//            .animation(.easeIn)
             .opacity(visible ? 1 : 0)
-        }
+        }        
     }
 }
 

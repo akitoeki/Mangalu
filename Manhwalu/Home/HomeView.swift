@@ -24,6 +24,7 @@ struct HomeView: View {
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 16)!]        
     }
     
+    
     var body: some View {
         ZStack {
             Color("TextPrimary")
@@ -34,30 +35,21 @@ struct HomeView: View {
                             TitleList(listName: "Popular", titles: self.homeModel.popularTitles, namespace: namespace)
                             TitleList(listName: "Lastest", titles: self.homeModel.lastestTitles, namespace: namespace)
                             TitleList(listName: "Discover", titles: self.homeModel.randomTitles, namespace: namespace)
-                                
                         }
                         .frame(width: UIScreen.main.bounds.width)
                     }
                     .navigationBarTitle("Trending", displayMode: .large)
                 }
-                .onAppear {
-                    homeModel.loadData()
-                }
                 .onPreferenceChange(PortalPreferenceKey.self) { (value) in
                     self.portal = value
                 }
                 .zIndex(1)
-//                .brightness(self.portal != nil ? -0.2 : 0)
-//                .animation(.default, value: self.portal)
-                
-                
-                
-            }.environmentObject(homeModel)
-            
-//            if (self.portal != nil) {
-//                self.portal!.content()
-//            }
+            }
         }
+        .onAppear {
+            homeModel.loadData()
+        }
+        .environmentObject(homeModel)
         
     }
 }

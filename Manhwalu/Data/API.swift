@@ -37,8 +37,51 @@ struct Title: Codable, Identifiable {
     var tags: [Tag]
 }
 
+struct TitleDetail: Codable, Identifiable {
+    let id: Int
+    var title: String
+    var chapters_count: Int
+    var slug: String
+    var alternate_title: String?
+    var description: String?
+    var image_url: String
+    var thumb_url: String
+    var tags: [Tag]
+    var artists: [Person]
+    var authors: [Person]
+}
+
+struct Person: Identifiable, Codable {
+    var id: Int
+    var comics_count: Int
+    var image_url: String
+    var name: String
+    var slug: String
+}
+
+struct Chapter: Codable, Identifiable{
+    var id: Int
+    var added_at: String
+    var name: String
+    var read: Bool
+    var slug: String
+}
+
+struct ChapterDetail: Codable {
+    var chapter: Chapter
+    var images: [ChapterImage]
+}
+
+struct ChapterImage: Codable, Identifiable {
+    var id: Int
+    var page: Int
+    var source_url: String
+    var thumbnail_url: String
+}
+
 class ReadManhwaAPI {
     var nsfw = false
+    
     func getPopularTitles(completion: @escaping ([Title]) -> ()) {
         let url = URL(string: "https://readmanhwa.com/api/comics?sort=popularity&duration=week&per_page=24&nsfw=\(nsfw)")
         URLSession.shared.dataTask(with: url!) { (data, _, error) in
@@ -81,6 +124,14 @@ class ReadManhwaAPI {
         let url = URL(string: "https://readmanhwa.com/api/comics/\(slug)/chapters?nsfw=\(nsfw)")
         URLSession.shared.dataTask(with: url!) { (data, _, error) in
             let res = try! JSONDecoder().decode([Chapter].self, from: data!)
+            completion(res)
+        }.resume()
+    }
+    
+    func getChapterImages(titleSlug: String, chapterSlug: String, completion: @escaping (ChapterDetail) -> ()) {
+        let url = URL(string: "https://readmanhwa.com/api/comics/\(titleSlug)/\(chapterSlug)/images?nsfw=\(nsfw)")
+        URLSession.shared.dataTask(with: url!) { (data, _, error) in
+            let res = try! JSONDecoder().decode(ChapterDetail.self, from: data!)
             completion(res)
         }.resume()
     }

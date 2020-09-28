@@ -44,8 +44,6 @@ struct TitleDetailView: View {
     @ObservedObject var urlImageModel: UrlImageModel
     var defaultImage = UIImage(named: "poster-placeholder")
     
-    @State var headerVisible: Bool = false
-    
     init(title: Title) {
         self.title = title
         self.titleModel = TitleModel(title: self.title)
@@ -55,7 +53,7 @@ struct TitleDetailView: View {
         ScrollView(.vertical, showsIndicators: false) {
             GeometryReader { geometry in
                 CustomTopNav(title: self.title.title, visible: geometry.frame(in: .global).minY < -400)
-                    .offset(y: -geometry.frame(in: .global).minY )                    
+                    .offset(y: -geometry.frame(in: .global).minY )
             }
             .frame(height: 0)
             .zIndex(100)
@@ -79,9 +77,9 @@ struct TitleDetailView: View {
                         .scaledToFill()
                         .frame(width: 300, height: 420)
                         .cornerRadius(4)
-                        .shadow(color: Color.gray.opacity(0.2), radius: 30, x: 0, y: 10)
+                        .shadow(color: Color.black.opacity(0.2), radius: 30, x: 0, y: 10)
                         .frame(width: 200, height: 320)
-                        .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 10)
+                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 10)
                         .frame(width: 300, height: 420)
                     
                     HStack {
@@ -162,7 +160,7 @@ struct TitleDetailView: View {
                     .padding(20)
                 
                 
-                TitleChapterList(chapters: titleModel.chapters)
+                TitleChapterList(chapters: titleModel.chapters, title: title)
                 
             }
         }
@@ -172,7 +170,6 @@ struct TitleDetailView: View {
         .onAppear {
             titleModel.loadData()
         }
-        .overlay(CustomTopNav(title: title.title, visible: self.headerVisible), alignment: .top)
         .edgesIgnoringSafeArea(.all)
     }
 }

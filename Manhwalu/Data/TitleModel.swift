@@ -8,35 +8,7 @@
 
 import SwiftUI
 
-struct TitleDetail: Codable, Identifiable {
-    let id: Int
-    var title: String
-    var chapters_count: Int
-    var slug: String
-    var alternate_title: String?
-    var description: String?
-    var image_url: String
-    var thumb_url: String
-    var tags: [Tag]
-    var artists: [Person]
-    var authors: [Person]
-}
 
-struct Person: Identifiable, Codable {
-    var id: Int
-    var comics_count: Int
-    var image_url: String
-    var name: String
-    var slug: String
-}
-
-struct Chapter: Codable, Identifiable{
-    var id: Int
-    var added_at: String
-    var name: String
-    var read: Bool
-    var slug: String
-}
 class TitleModel: ObservableObject {
     var title: Title
     @Published var titleDetail: TitleDetail? = nil
@@ -56,7 +28,6 @@ class TitleModel: ObservableObject {
     }
     
     func loadData() {
-                
         if (!isDetailLoaded && !isDetailLoading) {
             isDetailLoading = true
             api.getTitleDetail(slug: title.slug) { (detail) in
@@ -84,4 +55,5 @@ class TitleModel: ObservableObject {
             }
         }
     }
+    
 }
