@@ -49,7 +49,9 @@ struct HomeView: View {
         .onAppear {
             homeModel.loadData()
         }
-        .environmentObject(homeModel)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            homeModel.loadData()
+        }
         
     }
 }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "trending.png",
+      "filename" : "icons8-mango.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "trending@2x.png",
+      "filename" : "icons8-mango@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "trending@3x.png",
+      "filename" : "icons8-mango@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
