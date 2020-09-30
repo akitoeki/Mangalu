@@ -27,7 +27,7 @@ struct ContentView: View {
                 }
                 .tag(0)
             
-            Text("Library")
+            FavoriteView()
                 .font(.title)
                 .tabItem {
                     VStack {

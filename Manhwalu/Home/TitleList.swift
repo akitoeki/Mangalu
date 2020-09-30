@@ -26,7 +26,7 @@ struct TitleList: View {
                             NavigationLink(
                                 destination: TitleDetailView(title: title),
                                 label: {
-                                    TitleView(title: title)
+                                    TitleView(title: title)                                        
                                 }
                             ).foregroundColor(.primaryText)
                         }
@@ -34,7 +34,7 @@ struct TitleList: View {
                     .padding(.all)                    
                 }
             }
-        }.frame(width: screen.width, height: 330, alignment: .topLeading)
+        }.frame(width: screen.width, height: 360, alignment: .topLeading)
     }
 }
 struct TitleList_Previews: PreviewProvider {

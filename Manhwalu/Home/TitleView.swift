@@ -23,10 +23,12 @@ struct TagView: View {
 }
 struct TitleView: View {
     var title: Title
+    var preferredCoverHeight: CGFloat
     @ObservedObject var urlImageModel: UrlImageModel
     
-    init(title: Title) {
+    init(title: Title, preferredCoverHeight: CGFloat =  220) {
         self.title = title
+        self.preferredCoverHeight = preferredCoverHeight
         self.urlImageModel = UrlImageModel(urlString: title.image_url)
     }
     
@@ -43,8 +45,8 @@ struct TitleView: View {
         VStack(alignment: .leading, spacing: 4) {
             Image(uiImage: urlImageModel.image ?? TitleView.defaultImage!)
                 .resizable()
-                .scaledToFill()
-                .frame(width: 150, height: 210)
+                .aspectRatio(contentMode: .fill)
+                .frame(height: preferredCoverHeight)
                 .cornerRadius(4)
             Text("\(title.title)")
                 .font(.caption)
@@ -52,14 +54,14 @@ struct TitleView: View {
                 .multilineTextAlignment(.leading)
                 .lineLimit(2)
                 .padding(0)
-                .frame(width: 150, alignment: .topLeading)
+                .frame(alignment: .topLeading)
             
             HStack(alignment: .top, spacing: 4) {
                 ForEach(TitleView.topTags(tags: title.tags, max: 2), id: \.id) { tag in
                     TagView(name: tag.name)
                 }
             }
-        }.frame(width: 160, height: 280, alignment: .top)
+        }
     }
     
     static var defaultImage = UIImage(named: "poster-placeholder")
@@ -68,6 +70,12 @@ struct TitleView: View {
 struct TitleView_Previews: PreviewProvider {
     
     static var previews: some View {
-        TitleView(title: dummy_title)
+        Group {
+            TitleView(title: dummy_title)
+            TitleView(title: dummy_title)
+                .previewLayout(.fixed(width: 200, height: 250))
+                .preferredColorScheme(.dark)
+                
+        }
     }
 }
