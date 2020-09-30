@@ -7,26 +7,28 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TitleChapter: View {
     var chapter: Chapter
     var allChapters: [Chapter]
     var title: Title
+    var isRead: Bool = false
     @State var showChapter = false
     var body: some View {
         HStack {
             Image(systemName: "book")
                 .font(.system(size: 14, weight: .light, design: .default))
-//            NavigationLink(
-//                destination: Viewer(chapter: chapter, title: title),
-//                label: {
-//                    Text(chapter.name)
-//                        .font(.callout)
-//                        .accentColor(.primaryText)
-//                })
+            //            NavigationLink(
+            //                destination: Viewer(chapter: chapter, title: title),
+            //                label: {
+            //                    Text(chapter.name)
+            //                        .font(.callout)
+            //                        .accentColor(.primaryText)
+            //                })
             Button(action: {
                 
-                    self.showChapter.toggle()
+                self.showChapter.toggle()
                 
             }, label: {
                 Text(chapter.name)
@@ -52,6 +54,8 @@ struct TitleChapter: View {
 struct TitleChapterList: View {
     var chapters: [Chapter] = []
     var title: Title
+    
+    
     var body: some View {
         VStack {
             HStack {

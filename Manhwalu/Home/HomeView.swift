@@ -16,7 +16,7 @@ struct VisualEffectView: UIViewRepresentable {
 
 struct HomeView: View {
     @Namespace var namespace
-    @ObservedObject private var homeModel: HomeModel = HomeModel()
+    @StateObject private var homeModel: HomeModel = HomeModel()
     @State var portal: PortalPreference?
     
     init() {

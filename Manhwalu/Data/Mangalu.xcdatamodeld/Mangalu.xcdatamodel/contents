@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Activity" representedClassName="Activity" syncable="YES" codeGenerationType="class">
+        <attribute name="cached_title" optional="YES" attributeType="Binary"/>
+        <attribute name="chapter_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="chapter_name" optional="YES" attributeType="String"/>
+        <attribute name="chapter_slug" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title_name" optional="YES" attributeType="String"/>
+        <attribute name="title_slug" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Bookmark" representedClassName="Bookmark" syncable="YES" codeGenerationType="class">
+        <attribute name="current_chapter_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="current_chapter_slug" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="image_url" optional="YES" attributeType="String"/>
+        <attribute name="title_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title_slug" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CachedImage" representedClassName="CachedImage" syncable="YES" codeGenerationType="class">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CachedTitle" representedClassName="CachedTitle" syncable="YES" codeGenerationType="class">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="title_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Favorite" representedClassName="Favorite" syncable="YES" codeGenerationType="class">
+        <attribute name="cached_title" optional="YES" attributeType="Binary" customClassName="Title"/>
+        <attribute name="chapter_count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="has_new" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="image_url" attributeType="String"/>
+        <attribute name="last_read_chapter_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="last_read_chapter_slug" optional="YES" attributeType="String"/>
+        <attribute name="last_read_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="slug" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="title_id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="Activity" positionX="310.546875" positionY="-283.00390625" width="128" height="163"/>
+        <element name="Bookmark" positionX="-49.37890625" positionY="-0.484375" width="128" height="133"/>
+        <element name="CachedImage" positionX="250.36328125" positionY="-0.0859375" width="128" height="28"/>
+        <element name="Favorite" positionX="80.73828125" positionY="-311.046875" width="128" height="193"/>
+        <element name="CachedTitle" positionX="135" positionY="-162" width="128" height="73"/>
+    </elements>
+</model>

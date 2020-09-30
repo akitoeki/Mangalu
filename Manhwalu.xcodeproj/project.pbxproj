@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8245594C252383D300046D3A /* Mangalu.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8245594A252383D300046D3A /* Mangalu.xcdatamodeld */; };
+		8245595325238B0600046D3A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8245595225238B0600046D3A /* UIKit.framework */; };
 		827564242517246F009D6A33 /* TitleChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827564232517246F009D6A33 /* TitleChapter.swift */; };
 		82C1B1212515C22E00375560 /* TitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1B1202515C22E00375560 /* TitleModel.swift */; };
 		82C416A32513A56D004A64F5 /* TitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C416A22513A56D004A64F5 /* TitleList.swift */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8245594B252383D300046D3A /* Mangalu.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mangalu.xcdatamodel; sourceTree = "<group>"; };
+		8245595225238B0600046D3A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		827564232517246F009D6A33 /* TitleChapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChapter.swift; sourceTree = "<group>"; };
 		82C1B1202515C22E00375560 /* TitleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModel.swift; sourceTree = "<group>"; };
 		82C416A22513A56D004A64F5 /* TitleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleList.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8245595325238B0600046D3A /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +113,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8245595125238B0600046D3A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8245595225238B0600046D3A /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C25D5B1F2519B8A9009CD70F /* Viewer */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +136,7 @@
 				C274CCD82511CF63000E1E8C /* ManhwaluTests */,
 				C274CCE32511CF63000E1E8C /* ManhwaluUITests */,
 				C274CCBD2511CF62000E1E8C /* Products */,
+				8245595125238B0600046D3A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,6 +216,7 @@
 				C268101F251487FA00D615A6 /* HomeModel.swift */,
 				82C1B1202515C22E00375560 /* TitleModel.swift */,
 				C25D5B282519B926009CD70F /* ChapterModel.swift */,
+				8245594A252383D300046D3A /* Mangalu.xcdatamodeld */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -356,6 +371,7 @@
 				C2F50F752518B22F00F6AB76 /* Color.swift in Sources */,
 				C274CD042511F70B000E1E8C /* UrlImageModel.swift in Sources */,
 				C274CCC72511CF62000E1E8C /* ContentView.swift in Sources */,
+				8245594C252383D300046D3A /* Mangalu.xcdatamodeld in Sources */,
 				C25D5B292519B926009CD70F /* ChapterModel.swift in Sources */,
 				C25D5B212519B8B8009CD70F /* Viewer.swift in Sources */,
 				C274CCC52511CF62000E1E8C /* Manhwalu.xcdatamodeld in Sources */,
@@ -696,6 +712,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		8245594A252383D300046D3A /* Mangalu.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8245594B252383D300046D3A /* Mangalu.xcdatamodel */,
+			);
+			currentVersion = 8245594B252383D300046D3A /* Mangalu.xcdatamodel */;
+			path = Mangalu.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		C274CCC32511CF62000E1E8C /* Manhwalu.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

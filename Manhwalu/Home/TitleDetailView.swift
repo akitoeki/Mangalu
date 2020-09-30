@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct HorizontalLineShape: Shape {
     
@@ -38,17 +39,34 @@ struct HorizontalLine: View {
 struct TitleDetailView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     @ObservedObject var titleModel: TitleModel
     var title: Title
     @State var seeMore: Bool = false
     @ObservedObject var urlImageModel: UrlImageModel
     var defaultImage = UIImage(named: "poster-placeholder")
     
+    @State var showViewer: Bool = false
+    
+    
+    @FetchRequest(entity: Favorite.entity(), sortDescriptors: []) var favorites: FetchedResults<Favorite>
+    @FetchRequest var bookmarks: FetchedResults<Bookmark>
+    
     init(title: Title) {
         self.title = title
         self.titleModel = TitleModel(title: self.title)
         self.urlImageModel = UrlImageModel(urlString: title.image_url)
+        self._bookmarks = FetchRequest(entity: Bookmark.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)], predicate: NSPredicate(format: "title_id == %d", title.id), animation: .default)
     }
+    
+    func isFavorited() -> Bool {
+        print(favorites.count)
+        return (favorites.first(where: {fav in
+            return fav.title_id == self.title.id
+        }) != nil)
+    }
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             GeometryReader { geometry in
@@ -57,7 +75,7 @@ struct TitleDetailView: View {
             }
             .frame(height: 0)
             .zIndex(100)
-                        
+            
             VStack {
                 //Header
                 HStack {
@@ -100,10 +118,12 @@ struct TitleDetailView: View {
                             .foregroundColor(.gray)
                     }
                     HStack(alignment: .center, spacing: 10) {
-                        Button(action: {}, label: {
+                        Button(action: {
+                            isFavorited() ? removeFromFavorite() : addToFavorite()
+                        }, label: {
                             HStack {
-                                Image(systemName: "suit.heart")
-                                Text("Add to Library")
+                                Image(systemName: isFavorited() ? "heart.slash" : "suit.heart")
+                                Text(isFavorited() ? "Remove from Library" : "Add to Library")
                                     .font(.subheadline)
                             }
                             .padding(.vertical, 10)
@@ -115,9 +135,14 @@ struct TitleDetailView: View {
                             )
                         })
                         
-                        Button(action: {}, label: {
+                        Button(action: {
+                            
+                            
+                            self.showViewer.toggle()
+                            
+                        }, label: {
                             Image(systemName: "book")
-                            Text("Read Now")
+                            Text(bookmarks.first != nil ? "Continue" : "Read Now")
                                 .font(.subheadline)
                         })
                         .padding(.vertical, 12)
@@ -125,6 +150,13 @@ struct TitleDetailView: View {
                         .background(Color.orange)
                         .accentColor(.white)
                         .cornerRadius(30)
+                        .fullScreenCover(isPresented: $showViewer, content: {
+                            Viewer(
+                                chapter: (bookmarks.first != nil ? titleModel.chapters.first(where: {$0.slug == bookmarks.first!.current_chapter_slug})!
+                                            : titleModel.chapters.last!),
+                                allChapters: titleModel.chapters, title: title
+                            )
+                        })
                         
                     }
                     .padding(.vertical, 15)
@@ -171,6 +203,33 @@ struct TitleDetailView: View {
             titleModel.loadData()
         }
         .edgesIgnoringSafeArea(.all)
+    }
+    
+    func removeFromFavorite() {
+        if let obj = favorites.first(where: {$0.title_id == title.id}) {
+            managedObjectContext.delete(obj)
+        }
+    }
+    
+    func addToFavorite() {
+        let newFav = Favorite(context: managedObjectContext)
+        if let data = try? JSONEncoder().encode(title) {
+            newFav.cached_title = data
+        }
+        newFav.title_id = Int32(title.id)
+        if let chapter_count = title.chapter_count {
+            newFav.chapter_count = Int16(chapter_count)
+        }
+        newFav.has_new = false
+        newFav.title = title.title
+        newFav.image_url = title.image_url
+        newFav.slug = title.slug
+        do {
+            try managedObjectContext.save()
+        } catch let error as NSError {
+            print(error)
+        }
+        
     }
 }
 
