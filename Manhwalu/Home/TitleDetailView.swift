@@ -41,7 +41,7 @@ struct TitleDetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    @ObservedObject var titleModel: TitleModel
+    @StateObject var titleModel: TitleModel
     var title: Title
     @State var seeMore: Bool = false
     @ObservedObject var urlImageModel: UrlImageModel
@@ -55,7 +55,7 @@ struct TitleDetailView: View {
     
     init(title: Title) {
         self.title = title
-        self.titleModel = TitleModel(title: self.title)
+        self._titleModel = StateObject(wrappedValue: TitleModel(title: title))
         self.urlImageModel = UrlImageModel(urlString: title.image_url, persist: true)
         self._bookmarks = FetchRequest(entity: Bookmark.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)], predicate: NSPredicate(format: "title_id == %d", title.id), animation: .default)
     }
@@ -67,7 +67,7 @@ struct TitleDetailView: View {
     }
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
+        return ScrollView(.vertical, showsIndicators: false) {
             GeometryReader { geometry in
                 CustomTopNav(title: self.title.title, visible: true)
                     .opacity(Double((-100 - geometry.frame(in: .global).minY) / 100))
@@ -200,15 +200,17 @@ struct TitleDetailView: View {
                 TitleChapterList(chapters: titleModel.chapters, title: title, seenChapters: self.bookmarks.map({ (b) -> Int in
                     return Int(b.current_chapter_id)
                 }))
+                .onAppear {
+                    titleModel.loadData()
+                }
                 
             }
         }
+        
         .accentColor(.primaryText)
         .navigationBarHidden(true)
         .navigationTitle("")
-        .onAppear {
-            titleModel.loadData()
-        }
+        
         .edgesIgnoringSafeArea(.all)
     }
     

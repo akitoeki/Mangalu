@@ -11,10 +11,10 @@ import SwiftUI
 
 struct ViewerImage: View {
     var imgUrl: String
-    @ObservedObject var urlImageModel: UrlImageModel
+    @StateObject var urlImageModel: UrlImageModel
     init(imgUrl: String) {
         self.imgUrl = imgUrl
-        self.urlImageModel = UrlImageModel(urlString: imgUrl)
+        self._urlImageModel = StateObject(wrappedValue: UrlImageModel(urlString: imgUrl))
     }
     var body: some View {
         Image(uiImage: urlImageModel.image ?? TitleView.defaultImage!)
@@ -91,13 +91,13 @@ struct Viewer: View {
     var allChapters: [Chapter]
     var title: Title
     
-    @ObservedObject var chapterModel: ChapterModel
+    @StateObject var chapterModel: ChapterModel
     @State var showHeader = true
     
     init(chapter: Chapter, allChapters: [Chapter], title: Title) {
         self.title = title
         self.allChapters = allChapters
-        self.chapterModel = ChapterModel(title: title, chapter: chapter, allChapters: allChapters)
+        self._chapterModel = StateObject(wrappedValue: ChapterModel(title: title, chapter: chapter, allChapters: allChapters))
     }
     
     

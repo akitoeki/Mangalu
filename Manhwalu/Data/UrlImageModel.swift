@@ -24,11 +24,9 @@ class UrlImageModel: ObservableObject {
     
     func loadImage() {
         if loadImageFromCache() {
-            print("Loaded from inMemory Cache")
             return
         }
         if loadImageFromPersistentCache() {
-            print("Loaded from Persist Cache")
             return
         }
         loadImageFromUrl()        
@@ -43,7 +41,6 @@ class UrlImageModel: ObservableObject {
         }
 
         image = cacheImage
-        print("Loaded from inMemory Cache")
         return true
     }
     
@@ -54,7 +51,6 @@ class UrlImageModel: ObservableObject {
         guard let cacheImage = persistImageCache.get(forKey: urlString) else {
             return false
         }
-        print("Loaded from Persist Cache")
         image = cacheImage
         return true
     }

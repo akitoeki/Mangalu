@@ -11,9 +11,9 @@ import SwiftUI
 struct SearchView: View {
     @State var searchValue: String = ""
     var searchTimer: Timer?
-    @EnvironmentObject var settings: AppSettings
+
     
-    @ObservedObject var searchModel: SearchModel = SearchModel()
+    @StateObject var searchModel: SearchModel = SearchModel()
     var body: some View {
         UITextField.appearance().clearButtonMode = .whileEditing
         

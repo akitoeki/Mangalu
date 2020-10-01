@@ -69,7 +69,7 @@ struct TitleView: View {
                         TagView(name: tag.name)
                     }
                 }
-            }.frame(width: .infinity, height: 80, alignment: .topLeading)
+            }.frame(height: 80, alignment: .topLeading)
             
         }
         
