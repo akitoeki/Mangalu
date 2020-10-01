@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var selection = 0
     @Environment(\.colorScheme) var colorScheme
-    
+    @EnvironmentObject var settings: AppSettings
     
     var body: some View {
         TabView(selection: $selection){
@@ -32,7 +32,7 @@ struct ContentView: View {
                 .tabItem {
                     VStack {
                         Image("library")
-                            .renderingMode(.template)
+                            .renderingMode(.template)                            
                         Text("Library")
                     }
                 }
@@ -50,7 +50,7 @@ struct ContentView: View {
                 }
                 .tag(2)
             
-            Text("Search")
+            SearchView()
                 .font(.title)
                 .tabItem {
                     VStack {
@@ -62,7 +62,7 @@ struct ContentView: View {
                 .tag(3)
         }
         .accentColor(.orange)
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.top)        
         
     }
 }

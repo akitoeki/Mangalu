@@ -41,7 +41,6 @@ struct CustomTopNav: View {
             .background(Rectangle().fill(Color.backgroundColor.opacity(0.5)).blur(radius: 3))
             .accentColor(.primaryText)
             .transition(.opacity)
-            .opacity(visible ? 1 : 0)
         }        
     }
 }

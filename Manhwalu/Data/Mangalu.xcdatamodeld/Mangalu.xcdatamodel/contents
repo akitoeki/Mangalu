@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Activity" representedClassName="Activity" syncable="YES" codeGenerationType="class">
         <attribute name="cached_title" optional="YES" attributeType="Binary"/>
         <attribute name="chapter_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -19,8 +19,8 @@
         <attribute name="title_slug" optional="YES" attributeType="String"/>
     </entity>
     <entity name="CachedImage" representedClassName="CachedImage" syncable="YES" codeGenerationType="class">
-        <attribute name="data" optional="YES" attributeType="Binary"/>
-        <attribute name="url" optional="YES" attributeType="String"/>
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="url" attributeType="String"/>
     </entity>
     <entity name="CachedTitle" representedClassName="CachedTitle" syncable="YES" codeGenerationType="class">
         <attribute name="data" optional="YES" attributeType="Binary"/>
@@ -38,11 +38,16 @@
         <attribute name="title" attributeType="String"/>
         <attribute name="title_id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="SearchHistory" representedClassName="SearchHistory" syncable="YES" codeGenerationType="class">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="query" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Activity" positionX="310.546875" positionY="-283.00390625" width="128" height="163"/>
         <element name="Bookmark" positionX="-49.37890625" positionY="-0.484375" width="128" height="133"/>
-        <element name="CachedImage" positionX="250.36328125" positionY="-0.0859375" width="128" height="28"/>
-        <element name="Favorite" positionX="80.73828125" positionY="-311.046875" width="128" height="193"/>
+        <element name="CachedImage" positionX="250.36328125" positionY="-0.0859375" width="128" height="73"/>
         <element name="CachedTitle" positionX="135" positionY="-162" width="128" height="73"/>
+        <element name="Favorite" positionX="80.73828125" positionY="-311.046875" width="128" height="193"/>
+        <element name="SearchHistory" positionX="135" positionY="-162" width="128" height="73"/>
     </elements>
 </model>

@@ -33,11 +33,13 @@ struct TitleChapter: View {
             }, label: {
                 Text(chapter.name)
                     .font(.callout)
+                    .opacity(isRead ? 0.5 : 1)
             }).accentColor(.primaryText)
             Spacer()
             Text(chapter.added_at)
                 .font(.footnote)
                 .foregroundColor(.gray)
+                .opacity(isRead ? 0.5 : 1)
             Button(action: {}, label: {
                 Image(systemName: "arrow.down.circle")
                     .font(.system(size: 14, weight: .light, design: .default))
@@ -54,7 +56,7 @@ struct TitleChapter: View {
 struct TitleChapterList: View {
     var chapters: [Chapter] = []
     var title: Title
-    
+    var seenChapters: [Int] = []
     
     var body: some View {
         VStack {
@@ -77,7 +79,7 @@ struct TitleChapterList: View {
             }.padding(.horizontal, 20)
             
             ForEach(chapters, id: \.id) { chapter in
-                TitleChapter(chapter: chapter, allChapters: chapters, title: title)
+                TitleChapter(chapter: chapter, allChapters: chapters, title: title, isRead: seenChapters.contains(chapter.id))
             }
             Spacer(minLength: 100)
         }

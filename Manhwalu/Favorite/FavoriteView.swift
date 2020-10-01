@@ -10,25 +10,36 @@ import SwiftUI
 
 struct FavoriteView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 32)!]
-        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 16)!]
-    }
-    
     @FetchRequest(entity: Favorite.entity(), sortDescriptors: []) var favorites: FetchedResults<Favorite>
+    var favs: [Title] {
+        get {
+            print(favorites)
+            return favorites.map { (fav) -> Title in
+                return try! JSONDecoder().decode(Title.self, from: fav.cached_title!)
+            }
+        }
+    }
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 160, maximum: 200), spacing: 20)], alignment: .leading, spacing: 20){
-                    ForEach(0 ..< 10) { item in
-                        TitleView(title: dummy_title, preferredCoverHeight: 250.0)
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150, maximum: 250), spacing: 20)], alignment: .leading, spacing: 20){
+                    ForEach(favs) { item in
+                        NavigationLink(
+                            destination: TitleDetailView(title: item),
+                            label: {
+                                TitleView(title: item, preferredCoverHeight: 250)
+                            }
+                        )
+                        .accentColor(.primaryText)
                     }
                 }
                 .padding(.horizontal, 20)
+                .padding(.top, 20)
             }
             .navigationBarTitle("Favorites", displayMode: .large)
         }
         .edgesIgnoringSafeArea(.all)
+        .onAppear()
     }
 }
 

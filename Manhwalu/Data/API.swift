@@ -13,8 +13,8 @@ struct PaginatedResult<T: Codable>: Codable {
     var total: Int
     var current_page: Int
     var data: T
-    var from: Int
-    var to: Int
+    var from: Int?
+    var to: Int?
 }
 
 struct Tag: Codable, Identifiable {
@@ -80,7 +80,7 @@ struct ChapterImage: Codable, Identifiable {
 }
 
 class ReadManhwaAPI {
-    var nsfw = false
+    var nsfw = UserDefaults.standard.bool(forKey: "nsfw")
     
     func getPopularTitles(completion: @escaping ([Title]) -> ()) {
         let url = URL(string: "https://readmanhwa.com/api/comics?sort=popularity&duration=week&per_page=24&nsfw=\(nsfw)")
@@ -133,6 +133,14 @@ class ReadManhwaAPI {
         URLSession.shared.dataTask(with: url!) { (data, _, error) in
             let res = try! JSONDecoder().decode(ChapterDetail.self, from: data!)
             completion(res)
+        }.resume()
+    }
+    
+    func search(query: String, completion: @escaping ([Title]) -> ()) {
+        let url = URL(string: "https://readmanhwa.com/api/comics?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&per_page=12&nsfw=\(nsfw)")
+        URLSession.shared.dataTask(with: url!) { (data, _, error) in
+            let res = try! JSONDecoder().decode(PaginatedResult<[Title]>.self, from: data!)
+            completion(res.data)
         }.resume()
     }
 }

@@ -34,11 +34,12 @@ struct HomeView: View {
                             TitleList(listName: "Popular", titles: self.homeModel.popularTitles, namespace: namespace)
                             TitleList(listName: "Lastest", titles: self.homeModel.lastestTitles, namespace: namespace)
                             TitleList(listName: "Discover", titles: self.homeModel.randomTitles, namespace: namespace)
-                            TitleList(listName: "Recently Read", titles: self.homeModel.randomTitles, namespace: namespace)
+                            
                         }
                         .frame(width: UIScreen.main.bounds.width)
                     }
                     .navigationBarTitle("Trending", displayMode: .large)
+                    
                 }
                 .onPreferenceChange(PortalPreferenceKey.self) { (value) in
                     self.portal = value

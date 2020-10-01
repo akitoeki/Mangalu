@@ -29,7 +29,7 @@ struct TitleView: View {
     init(title: Title, preferredCoverHeight: CGFloat =  220) {
         self.title = title
         self.preferredCoverHeight = preferredCoverHeight
-        self.urlImageModel = UrlImageModel(urlString: title.image_url)
+        self.urlImageModel = UrlImageModel(urlString: title.image_url, persist: true)
     }
     
     static func topTags(tags: [Tag], max: Int) -> [Tag] {
@@ -38,38 +38,41 @@ struct TitleView: View {
             return []
         }
         return Array(tags[0...cutoff-1])
-        
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Image(uiImage: urlImageModel.image ?? TitleView.defaultImage!)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: preferredCoverHeight)
+                .scaledToFit()
                 .cornerRadius(4)
                 .overlay(
                     Image("book-mask")
-                        .resizable()                        
-                        .frame(width: 12, height: 210, alignment: .leading)
+                        .resizable()
+                        .scaledToFit()
                         .opacity(0.4)
                 , alignment: .leading)
-                .animation(.easeIn)
+                .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0.0, y: 4)
                 
-            Text("\(title.title)")
-                .font(.caption)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.leading)
-                .lineLimit(2)
-                .padding(0)
-                .frame(alignment: .topLeading)
-            
-            HStack(alignment: .top, spacing: 4) {
-                ForEach(TitleView.topTags(tags: title.tags, max: 2), id: \.id) { tag in
-                    TagView(name: tag.name)
+                
+            VStack(alignment: .leading, spacing: 4){
+                Text("\(title.title)")
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+                    .padding(.top, 10)
+                    .frame(width: 150, alignment: .bottomLeading)
+                
+                HStack(alignment: .top, spacing: 4) {
+                    ForEach(TitleView.topTags(tags: title.tags, max: 2), id: \.id) { tag in
+                        TagView(name: tag.name)
+                    }
                 }
-            }
+            }.frame(width: .infinity, height: 80, alignment: .topLeading)
+            
         }
+        
     }
     
     static var defaultImage = UIImage(named: "poster-placeholder")
@@ -80,9 +83,8 @@ struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             TitleView(title: dummy_title)
-            TitleView(title: dummy_title)
-                .previewLayout(.fixed(width: 200, height: 250))
-                .preferredColorScheme(.dark)
+            TitleView(title: dummy_title, preferredCoverHeight: 250)
+                .previewLayout(.fixed(width: 150, height: 600))
                 
         }
     }

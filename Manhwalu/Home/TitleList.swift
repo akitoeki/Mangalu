@@ -28,13 +28,19 @@ struct TitleList: View {
                                 label: {
                                     TitleView(title: title)                                        
                                 }
-                            ).foregroundColor(.primaryText)
+                            )
+                            .foregroundColor(.primaryText)
+                            
                         }
                     }                    
-                    .padding(.all)                    
+                    .padding(.all)
+                    
+                    
                 }
             }
-        }.frame(width: screen.width, height: 360, alignment: .topLeading)
+        }
+        .frame(width: screen.width, height: 360, alignment: .topLeading)
+        
     }
 }
 struct TitleList_Previews: PreviewProvider {

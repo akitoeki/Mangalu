@@ -56,12 +56,11 @@ struct TitleDetailView: View {
     init(title: Title) {
         self.title = title
         self.titleModel = TitleModel(title: self.title)
-        self.urlImageModel = UrlImageModel(urlString: title.image_url)
+        self.urlImageModel = UrlImageModel(urlString: title.image_url, persist: true)
         self._bookmarks = FetchRequest(entity: Bookmark.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)], predicate: NSPredicate(format: "title_id == %d", title.id), animation: .default)
     }
     
-    func isFavorited() -> Bool {
-        print(favorites.count)
+    func isFavorited() -> Bool {        
         return (favorites.first(where: {fav in
             return fav.title_id == self.title.id
         }) != nil)
@@ -70,7 +69,8 @@ struct TitleDetailView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             GeometryReader { geometry in
-                CustomTopNav(title: self.title.title, visible: geometry.frame(in: .global).minY < -400)
+                CustomTopNav(title: self.title.title, visible: true)
+                    .opacity(Double((-100 - geometry.frame(in: .global).minY) / 100))
                     .offset(y: -geometry.frame(in: .global).minY )
             }
             .frame(height: 0)
@@ -93,7 +93,7 @@ struct TitleDetailView: View {
                     Image(uiImage: urlImageModel.image ?? TitleView.defaultImage!)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 300, height: 420)
+                        .frame(width: 300, height: 420)	
                         .cornerRadius(4)
                         .shadow(color: Color.black.opacity(0.2), radius: 30, x: 0, y: 10)
                         .frame(width: 200, height: 320)
@@ -137,7 +137,6 @@ struct TitleDetailView: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 30)
                                     .stroke(Color.accentColor, lineWidth: 2)
-                                
                             )
                         })
                         
@@ -198,7 +197,9 @@ struct TitleDetailView: View {
                     .padding(20)
                 
                 
-                TitleChapterList(chapters: titleModel.chapters, title: title)
+                TitleChapterList(chapters: titleModel.chapters, title: title, seenChapters: self.bookmarks.map({ (b) -> Int in
+                    return Int(b.current_chapter_id)
+                }))
                 
             }
         }
