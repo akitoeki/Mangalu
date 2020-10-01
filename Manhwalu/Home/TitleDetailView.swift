@@ -99,6 +99,12 @@ struct TitleDetailView: View {
                         .frame(width: 200, height: 320)
                         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 10)
                         .frame(width: 300, height: 420)
+                        .overlay(
+                            Image("book-mask")
+                                .resizable()
+                                .frame(width: 24, height: 420, alignment: .leading)
+                                .opacity(0.4)
+                        , alignment: .leading)
                     
                     HStack {
                         ForEach(TitleView.topTags(tags: title.tags, max: 5), id: \.id) { tag in

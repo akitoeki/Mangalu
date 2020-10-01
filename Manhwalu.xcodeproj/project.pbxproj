@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8245594C252383D300046D3A /* Mangalu.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8245594A252383D300046D3A /* Mangalu.xcdatamodeld */; };
 		8245595325238B0600046D3A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8245595225238B0600046D3A /* UIKit.framework */; };
+		8252834E2524DBF000E4FF49 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8252834D2524DBF000E4FF49 /* SearchView.swift */; };
 		827564242517246F009D6A33 /* TitleChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827564232517246F009D6A33 /* TitleChapter.swift */; };
 		82C1B1212515C22E00375560 /* TitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1B1202515C22E00375560 /* TitleModel.swift */; };
 		82C416A32513A56D004A64F5 /* TitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C416A22513A56D004A64F5 /* TitleList.swift */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		8245594B252383D300046D3A /* Mangalu.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mangalu.xcdatamodel; sourceTree = "<group>"; };
 		8245595225238B0600046D3A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8252834D2524DBF000E4FF49 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		827564232517246F009D6A33 /* TitleChapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChapter.swift; sourceTree = "<group>"; };
 		82C1B1202515C22E00375560 /* TitleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModel.swift; sourceTree = "<group>"; };
 		82C416A22513A56D004A64F5 /* TitleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleList.swift; sourceTree = "<group>"; };
@@ -123,6 +125,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8252834C2524DBE100E4FF49 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				8252834D2524DBF000E4FF49 /* SearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		C25D5B1F2519B8A9009CD70F /* Viewer */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				C2BA793A2524A34A003AF0F4 /* Favorite */,
+				8252834C2524DBE100E4FF49 /* Search */,
 				C25D5B1F2519B8A9009CD70F /* Viewer */,
 				C274CD0525121A3A000E1E8C /* Components */,
 				C274CCFA2511E137000E1E8C /* Data */,
@@ -383,6 +394,7 @@
 				C274CD042511F70B000E1E8C /* UrlImageModel.swift in Sources */,
 				C274CCC72511CF62000E1E8C /* ContentView.swift in Sources */,
 				8245594C252383D300046D3A /* Mangalu.xcdatamodeld in Sources */,
+				8252834E2524DBF000E4FF49 /* SearchView.swift in Sources */,
 				C25D5B292519B926009CD70F /* ChapterModel.swift in Sources */,
 				C25D5B212519B8B8009CD70F /* Viewer.swift in Sources */,
 				C274CCC52511CF62000E1E8C /* Manhwalu.xcdatamodeld in Sources */,
