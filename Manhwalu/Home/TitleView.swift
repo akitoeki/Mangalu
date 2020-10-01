@@ -46,6 +46,14 @@ struct TitleView: View {
                 .scaledToFill()
                 .frame(width: 150, height: 210)
                 .cornerRadius(4)
+                .overlay(
+                    Image("book-mask")
+                        .resizable()                        
+                        .frame(width: 12, height: 210, alignment: .leading)
+                        .opacity(0.4)
+                , alignment: .leading)
+                .animation(.easeIn)
+                
             Text("\(title.title)")
                 .font(.caption)
                 .fontWeight(.bold)
