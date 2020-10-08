@@ -23,12 +23,14 @@ struct TagView: View {
 }
 struct TitleView: View {
     var title: Title
+    var hasNew: Bool = false
     var preferredCoverHeight: CGFloat
     @ObservedObject var urlImageModel: UrlImageModel
     
-    init(title: Title, preferredCoverHeight: CGFloat =  220) {
+    init(title: Title, preferredCoverHeight: CGFloat =  220, hasNew: Bool = false) {
         self.title = title
         self.preferredCoverHeight = preferredCoverHeight
+        self.hasNew = hasNew
         self.urlImageModel = UrlImageModel(urlString: title.image_url, persist: true)
     }
     
@@ -45,6 +47,18 @@ struct TitleView: View {
             Image(uiImage: urlImageModel.image ?? TitleView.defaultImage!)
                 .resizable()
                 .scaledToFit()
+                .overlay(VStack {
+                    if hasNew {
+                        Text("New")
+                            .font(.caption)
+                            .foregroundColor(.white)
+                            .padding(2)
+                            .background(Color.red)
+                            .shadow(radius: 2 )
+                        
+                    }
+                }, alignment: .topTrailing)
+                
                 .cornerRadius(4)
                 .overlay(
                     Image("book-mask")
@@ -83,7 +97,7 @@ struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             TitleView(title: dummy_title)
-            TitleView(title: dummy_title, preferredCoverHeight: 250)
+            TitleView(title: dummy_title, preferredCoverHeight: 250, hasNew: true)
                 .previewLayout(.fixed(width: 150, height: 600))
                 
         }

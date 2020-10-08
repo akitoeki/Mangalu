@@ -14,7 +14,7 @@ class SearchModel: ObservableObject {
     @Published var searchQuery: String? = nil
     func search(query: String) {
         isSearching = true
-        api.search(query: query) { (data) in
+        API.main.search(query: query) { (data) in
             self.searchQuery = query
             DispatchQueue.main.async {
                 self.isSearching = false

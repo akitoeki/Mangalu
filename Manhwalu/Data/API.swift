@@ -145,4 +145,7 @@ class ReadManhwaAPI {
     }
 }
 
-let api = ReadManhwaAPI()
+
+class API {
+    static var main = ReadManhwaAPI()
+}

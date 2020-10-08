@@ -66,6 +66,11 @@ struct TitleDetailView: View {
         }) != nil)
     }
     
+    func onReadChapter() {
+        
+    }
+        
+    
     var body: some View {
         return ScrollView(.vertical, showsIndicators: false) {
             GeometryReader { geometry in
@@ -141,8 +146,6 @@ struct TitleDetailView: View {
                         })
                         
                         Button(action: {
-                            
-                            
                             self.showViewer.toggle()
                             
                         }, label: {
@@ -150,6 +153,7 @@ struct TitleDetailView: View {
                             Text(bookmarks.first != nil ? "Continue" : "Read Now")
                                 .font(.subheadline)
                         })
+                        .disabled(titleModel.chapters.count == 0)
                         .padding(.vertical, 12)
                         .padding(.horizontal, 26)
                         .background(Color.orange)

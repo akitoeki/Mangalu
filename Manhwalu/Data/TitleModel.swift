@@ -30,7 +30,7 @@ class TitleModel: ObservableObject {
     func loadData() {
         if (!isDetailLoaded && !isDetailLoading) {
             isDetailLoading = true
-            api.getTitleDetail(slug: title.slug) { (detail) in
+            API.main.getTitleDetail(slug: title.slug) { (detail) in
                 DispatchQueue.main.async {
                     self.titleDetail = detail
                     self.isDetailLoaded = true
@@ -41,7 +41,7 @@ class TitleModel: ObservableObject {
         
         if (!isChapterLoading) {
             isChapterLoading = true
-            api.getTitleChapters(slug: title.slug) { (chapters) in
+            API.main.getTitleChapters(slug: title.slug) { (chapters) in
                 DispatchQueue.main.async {
                     self.chapters = chapters
                     self.isChapterLoaded = true
@@ -52,7 +52,7 @@ class TitleModel: ObservableObject {
         
         if (!isRecommendationLoaded && !isReccomendationLoading) {
             isReccomendationLoading = true
-            api.getTitleChapters(slug: title.slug) { (chapters) in
+            API.main.getTitleChapters(slug: title.slug) { (chapters) in
                 DispatchQueue.main.async {
                     self.chapters = chapters
                     self.isChapterLoaded = true

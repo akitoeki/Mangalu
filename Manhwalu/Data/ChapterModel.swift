@@ -114,7 +114,7 @@ class ChapterModel: ObservableObject {
             return
         }
         isChapterDetailLoading = true
-        api.getChapterImages(titleSlug: title.slug, chapterSlug: currentChapter.slug) { (chapterDetail) in
+        API.main.getChapterImages(titleSlug: title.slug, chapterSlug: currentChapter.slug) { (chapterDetail) in
             DispatchQueue.main.async {
                 self.chapterDetail = chapterDetail
                 self.isChapterDetailLoading = false

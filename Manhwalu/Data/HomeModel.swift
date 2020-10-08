@@ -29,7 +29,7 @@ class HomeModel: ObservableObject {
         
         if !isLoadingLatest {
             self.isLoadingLatest = true
-            api.getLastesTitles { (titles) in
+            API.main.getLastesTitles { (titles) in
                 DispatchQueue.main.async {
                     self.lastestTitles = titles
                     self.isLoadingLatest = false
@@ -40,7 +40,7 @@ class HomeModel: ObservableObject {
         
         if !isLoadingPopular {
             self.isLoadingPopular = true
-            api.getPopularTitles { (titles) in
+            API.main.getPopularTitles { (titles) in
                 DispatchQueue.main.async {
                     self.popularTitles = titles
                     self.isLoadingPopular = false
@@ -51,7 +51,7 @@ class HomeModel: ObservableObject {
         
         if !isLoadingRandom {
             self.isLoadingRandom = true
-            api.getRandomTitles { (titles) in
+            API.main.getRandomTitles { (titles) in
                 DispatchQueue.main.async {
                     self.randomTitles = titles
                     self.isLoadingRandom = false

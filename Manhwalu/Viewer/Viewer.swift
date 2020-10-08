@@ -93,11 +93,14 @@ struct Viewer: View {
     
     @StateObject var chapterModel: ChapterModel
     @State var showHeader = true
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest var favorite: FetchedResults<Favorite>
     
     init(chapter: Chapter, allChapters: [Chapter], title: Title) {
         self.title = title
         self.allChapters = allChapters
         self._chapterModel = StateObject(wrappedValue: ChapterModel(title: title, chapter: chapter, allChapters: allChapters))
+        self._favorite = FetchRequest(entity: Favorite.entity(), sortDescriptors: [], predicate: NSPredicate(format: "title_id == %d", title.id), animation: .default)
     }
     
     
@@ -142,6 +145,10 @@ struct Viewer: View {
         .frame(width: screen.width, height: screen.height, alignment: .top)
         .onAppear(perform: {
             self.chapterModel.loadCurrent()
+            if (favorite.count > 0) {
+                favorite.first?.has_new = false
+                try? managedObjectContext.save()
+            }
         })
         
     }
