@@ -19,13 +19,16 @@ class HomeModel: ObservableObject {
     @Published var randomTitles: [Title] = []
     @Published var isLoadingRandom = false
     
+    var lastUpdate: Date = Date(timeIntervalSince1970: 0)
+    
     func loadData (force: Bool = false) {
-        guard (!isLoaded || force) else {
-            print("Loaded from cache")
+        if (isLoaded && !force && lastUpdate.timeIntervalSinceNow > -300 ) {
+            print("LOADED FROM CACHE")
             return
         }
         self.isLoaded = false
         
+        lastUpdate = Date()
         
         if !isLoadingLatest {
             self.isLoadingLatest = true
