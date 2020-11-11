@@ -22,7 +22,7 @@ struct TitleList: View {
             if (titles.count > 0) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .top, spacing: 20) {
-                        ForEach(titles, id: \.id) { title in
+                        ForEach(titles, id: \.slug) { title in
                             NavigationLink(
                                 destination: TitleDetailView(title: title),
                                 label: {

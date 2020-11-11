@@ -83,24 +83,24 @@ class ReadManhwaAPI {
     var nsfw = UserDefaults.standard.bool(forKey: "nsfw")
     
     func getPopularTitles(completion: @escaping ([Title]) -> ()) {
-        let url = URL(string: "https://readmanhwa.com/api/comics?sort=popularity&duration=week&per_page=24&nsfw=\(nsfw)")
+        let url = URL(string: "https://ok798669p0.execute-api.ap-southeast-1.amazonaws.com/api?page=1&nsfw=\(nsfw)&orderby=trending")
         URLSession.shared.dataTask(with: url!) { (data, _, error) in
             let res = try! JSONDecoder().decode(PaginatedResult<[Title]>.self, from: data!)
             completion(res.data)
         }.resume()
     }
     func getLastesTitles(completion: @escaping ([Title]) -> ()) {
-        let url = URL(string: "https://readmanhwa.com/api/comics?latest=true&per_page=24&nsfw=\(nsfw)")
+        let url = URL(string: "https://ok798669p0.execute-api.ap-southeast-1.amazonaws.com/api?page=0&nsfw=\(nsfw)&orderby=latest")
         URLSession.shared.dataTask(with: url!) { (data, _, error) in
-            let res = try! JSONDecoder().decode([Title].self, from: data!)
-            completion(res)
+            let res = try! JSONDecoder().decode(PaginatedResult<[Title]>.self, from: data!)
+            completion(res.data)
         }.resume()
     }
     func getRandomTitles(completion: @escaping ([Title]) -> ()) {
-        let url = URL(string: "https://readmanhwa.com/api/comics?discover=true&per_page=24&nsfw=\(nsfw)")
+        let url = URL(string: "https://ok798669p0.execute-api.ap-southeast-1.amazonaws.com/api?page=0&nsfw=\(nsfw)&orderby=new-manga")
         URLSession.shared.dataTask(with: url!) { (data, _, error) in
-            let res = try! JSONDecoder().decode([Title].self, from: data!)
-            completion(res)
+            let res = try! JSONDecoder().decode(PaginatedResult<[Title]>.self, from: data!)
+            completion(res.data)
         }.resume()
     }
     func getTitleDetail(slug: String, completion: @escaping (TitleDetail) -> ()) {
