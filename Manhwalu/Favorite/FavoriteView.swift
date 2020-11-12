@@ -21,7 +21,7 @@ struct FavoriteView: View {
     
     func checkForUpdates() {
         favorites.forEach { (favObj) in
-            if Date().timeIntervalSince(favObj.last_update_check!) > 3600 {
+            if Date().timeIntervalSince(favObj.last_update_check!) > 300 {
                 API.main.getTitleDetail(slug: favObj.slug!) { (title) in
                     favObj.last_update_check = Date()
                     if (favObj.chapter_count < title.chapters_count) {
@@ -68,6 +68,7 @@ struct FavoriteView: View {
             }
             .navigationBarTitle("Favorites", displayMode: .large)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .edgesIgnoringSafeArea(.all)
         .onAppear(perform: {
             checkForUpdates()

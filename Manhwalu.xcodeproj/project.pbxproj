@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,6 +33,9 @@
 		C274CD0725121A55000E1E8C /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C274CD0625121A55000E1E8C /* TitleView.swift */; };
 		C274CD0925121A7D000E1E8C /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C274CD0825121A7D000E1E8C /* dummy.swift */; };
 		C2BA793C2524A35F003AF0F4 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BA793B2524A35F003AF0F4 /* FavoriteView.swift */; };
+		C2C731F2255D23AF0001A19B /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = C2C731F1255D23AF0001A19B /* Apollo */; };
+		C2C731F4255D23AF0001A19B /* ApolloCore in Frameworks */ = {isa = PBXBuildFile; productRef = C2C731F3255D23AF0001A19B /* ApolloCore */; };
+		C2C731F6255D23AF0001A19B /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = C2C731F5255D23AF0001A19B /* ApolloWebSocket */; };
 		C2CD245E2525DA0E004A81EC /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CD245D2525DA0E004A81EC /* SearchModel.swift */; };
 		C2CD24662525EF47004A81EC /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CD24652525EF47004A81EC /* AppSettings.swift */; };
 		C2F50F752518B22F00F6AB76 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F50F742518B22F00F6AB76 /* Color.swift */; };
@@ -101,6 +104,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8245595325238B0600046D3A /* UIKit.framework in Frameworks */,
+				C2C731F6255D23AF0001A19B /* ApolloWebSocket in Frameworks */,
+				C2C731F2255D23AF0001A19B /* Apollo in Frameworks */,
+				C2C731F4255D23AF0001A19B /* ApolloCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +281,11 @@
 			dependencies = (
 			);
 			name = Manhwalu;
+			packageProductDependencies = (
+				C2C731F1255D23AF0001A19B /* Apollo */,
+				C2C731F3255D23AF0001A19B /* ApolloCore */,
+				C2C731F5255D23AF0001A19B /* ApolloWebSocket */,
+			);
 			productName = Manhwalu;
 			productReference = C274CCBC2511CF62000E1E8C /* Manhwalu.app */;
 			productType = "com.apple.product-type.application";
@@ -347,6 +358,9 @@
 				Base,
 			);
 			mainGroup = C274CCB32511CF62000E1E8C;
+			packageReferences = (
+				C2C731F0255D23AF0001A19B /* XCRemoteSwiftPackageReference "apollo-ios" */,
+			);
 			productRefGroup = C274CCBD2511CF62000E1E8C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -742,6 +756,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C2C731F0255D23AF0001A19B /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.36.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C2C731F1255D23AF0001A19B /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2C731F0255D23AF0001A19B /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		C2C731F3255D23AF0001A19B /* ApolloCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2C731F0255D23AF0001A19B /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloCore;
+		};
+		C2C731F5255D23AF0001A19B /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2C731F0255D23AF0001A19B /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloWebSocket;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8245594A252383D300046D3A /* Mangalu.xcdatamodeld */ = {

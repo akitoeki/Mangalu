@@ -41,6 +41,7 @@ struct HomeView: View {
                     .navigationBarTitle("Trending", displayMode: .large)
                     
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
                 .onPreferenceChange(PortalPreferenceKey.self) { (value) in
                     self.portal = value
                 }
